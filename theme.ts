@@ -10,4 +10,24 @@ export const theme = createTheme({
       main: blue[600],
     },
   },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          "&:focus": {
+            outline: "none",
+          },
+        },
+      },
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          "&:focus": {
+            outline: "none",
+          },
+        },
+      },
+    },
+  },
 });
