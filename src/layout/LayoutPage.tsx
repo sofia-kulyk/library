@@ -1,11 +1,17 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { NavBar } from "./NavBar";
+import UserPageDrawer from "../components/UserPageDrawer";
 
-export const LayoutPage = () => {
+const Layout = () => {
+  const location = useLocation();
+
   return (
     <>
       <NavBar />
+      {location.pathname === "/user-page" && <UserPageDrawer />}
       <Outlet />
     </>
   );
 };
+
+export default Layout;
