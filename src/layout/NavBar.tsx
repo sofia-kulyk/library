@@ -3,12 +3,12 @@ import { AppBar, Button, styled, Toolbar, Typography } from "@mui/material";
 import { Paths } from "../utils/types";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const StyledButton = styled(Button)<{ show: boolean }>(({ show }) => ({
+const StyledButton = styled(Button)(() => ({
   backgroundColor: "#085ac4",
   padding: "7px 30px",
   fontWeight: "bold",
   color: "white",
-  display: show ? "block" : "none",
+  // display: show ? "block" : "none",
 }));
 export const NavBar = () => {
   const navigate = useNavigate();
@@ -40,12 +40,9 @@ export const NavBar = () => {
         >
           Your Library
         </Typography>
-        <StyledButton
-          show={location.pathname === Paths.HomePage}
-          onClick={handleSignInClick}
-        >
-          Sign in
-        </StyledButton>
+        {location.pathname === Paths.HomePage && (
+          <StyledButton onClick={handleSignInClick}>Sign in</StyledButton>
+        )}
       </Toolbar>
     </AppBar>
   );

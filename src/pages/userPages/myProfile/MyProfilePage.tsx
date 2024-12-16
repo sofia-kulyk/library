@@ -1,24 +1,32 @@
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  IconButton,
-  InputLabel,
-  styled,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, IconButton, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import { useState } from "react";
-const CustomTextField = styled(TextField)({
-  "& .MuiInputBase-input": {
-    color: "grey",
-  },
-});
+import EditedMode from "./EditMode";
+import SavedMode from "./SavedMode";
+
+type User = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  birthday: string;
+};
+
 const MyProfilePage = () => {
   const [profilePhotoUrl, setProfilePhotoUrl] = useState<null | string>(null);
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const [userinfo, setUserInfo] = useState<User>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    birthday: "",
+  });
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setUserInfo((prev) => ({
+      ...prev,
+      [event?.target.name]: event?.target.value,
+    }));
+  }
   function handleProfilePhotoChange(
     event: React.ChangeEvent<HTMLInputElement>
   ) {
@@ -72,59 +80,15 @@ const MyProfilePage = () => {
           My Profile
         </Typography>
       </Box>
-      <Card sx={{ minWidth: "450px", padding: "20px", marginLeft: "200px" }}>
-        <CardContent>
-          <Box display="flex" justifyContent="space-between">
-            <Box>
-              <InputLabel>First name</InputLabel>
-              <TextField
-                margin="dense"
-                // label={text.myProfile.firstName}
-                size="small"
-                name="fistName"
-                // value={newUserData.fistName}
-                // onChange={handleChange}
-              />
-            </Box>
-            <Box>
-              <InputLabel>Last name</InputLabel>
-              <TextField
-                margin="dense"
-                // label={text.myProfile.lastName}
-                size="small"
-                // value={newUserData.lastName}
-                name="lastName"
-                // onChange={handleChange}
-              />
-            </Box>
-          </Box>
-          <Box sx={{ marginTop: "15px" }}>
-            <InputLabel>Email</InputLabel>
-            <TextField
-              margin="dense"
-              //   label={text.myProfile.email}
-              size="small"
-              name="email"
-              type="email"
-              //   value={newUserData.email}
-              fullWidth
-              //   onChange={handleChange}
-            />
-          </Box>
-          <Box sx={{ marginTop: "20px" }}>
-            <InputLabel>Date of birth</InputLabel>
-            <CustomTextField
-              variant="standard"
-              type="date"
-              size="small"
-              margin="dense"
-              // value={newUserData.birthday}
-              name="birthday"
-              // onChange={handleChange}
-            />
-          </Box>
-        </CardContent>
-      </Card>
+      {isEditMode ? (
+        <EditedMode
+          userInfo={userinfo}
+          handleChange={handleChange}
+          setIsEditMode={setIsEditMode}
+        />
+      ) : (
+        <SavedMode setIsEditMode={setIsEditMode} userInfo={userinfo} />
+      )}
     </>
   );
 };
