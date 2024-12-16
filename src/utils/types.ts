@@ -3,4 +3,5 @@ export enum Paths {
   SignInPage = "/sign-in",
   SignUpPage = "/sign-up",
   UserPage = "/user-page",
+  MyProfilePage = "/user-page/my-profile",
 }
