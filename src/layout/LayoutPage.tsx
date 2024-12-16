@@ -8,7 +8,7 @@ const Layout = () => {
   return (
     <>
       <NavBar />
-      {location.pathname === "/user-page" && <UserPageDrawer />}
+      {location.pathname.includes("/user-page") && <UserPageDrawer />}
       <Outlet />
     </>
   );

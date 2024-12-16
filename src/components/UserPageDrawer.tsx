@@ -8,6 +8,8 @@ import {
   Box,
 } from "@mui/material";
 import { LibraryBooks, AccountBox, Favorite } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
+import { Paths } from "../utils/types";
 
 const drawerWidth = 250;
 const drawerList = [
@@ -17,6 +19,11 @@ const drawerList = [
 ];
 
 const UserPageDrawer = () => {
+  const navigate = useNavigate();
+
+  function handleClick(name: string) {
+    if (name === "My profile") navigate(Paths.MyProfilePage);
+  }
   return (
     <Drawer
       variant="permanent"
@@ -34,7 +41,7 @@ const UserPageDrawer = () => {
         <List>
           {drawerList.map((item) => (
             <ListItem key={item.name} disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={() => handleClick(item.name)}>
                 <ListItemIcon sx={{ color: "#085ac4" }}>
                   <item.icon />
                 </ListItemIcon>

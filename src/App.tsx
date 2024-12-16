@@ -5,7 +5,8 @@ import { Paths } from "./utils/types";
 import { SignInPage } from "./pages/SignInPage";
 import { SignUpPage } from "./pages/SignUpPage";
 import Layout from "./layout/LayoutPage";
-import { UserPage } from "./pages/UserPage";
+import { UserPage } from "./pages/userPages/UserPage";
+import MyProfilePage from "./pages/userPages/myProfile/MyProfilePage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path={Paths.SignInPage} element={<SignInPage />} />
         <Route path={Paths.SignUpPage} element={<SignUpPage />} />
         <Route path={Paths.UserPage} element={<UserPage />} />
+        <Route path={Paths.MyProfilePage} element={<MyProfilePage />} />
       </Route>
     </Routes>
   );
