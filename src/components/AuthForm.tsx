@@ -14,8 +14,12 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import { Paths } from "../utils/types";
-import React from "react";
+import React, { useState } from "react";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { app } from "../../firebaseConfig.ts";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+const auth = getAuth(app);
 
 type Props = {
   isLogin: boolean;
@@ -23,11 +27,26 @@ type Props = {
 export const AuthForm: React.FC<Props> = ({ isLogin }) => {
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [userData, setUserData] = useState({ email: "", password: "" });
 
   const navigate = useNavigate();
+
   function handleCLick() {
-    navigate(Paths.HomePage);
+    signInWithEmailAndPassword(auth, userData.email, userData.password).then(
+      (userCredential) => {
+        const user = userCredential.user;
+        navigate(Paths.UserPage);
+        console.log(user);
+      }
+    );
   }
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setUserData((prev) => ({
+      ...prev,
+      [event.target.name]: event?.target.value,
+    }));
+  }
+  console.log(userData);
   return (
     <Card
       sx={{
@@ -46,7 +65,13 @@ export const AuthForm: React.FC<Props> = ({ isLogin }) => {
           {isLogin ? "Login" : "Sign up"}
         </Typography>
         <Box display={"flex"} flexDirection={"column"}>
-          <TextField label={isLogin ? "Login" : "Sign up"} margin={"normal"} />
+          <TextField
+            label={isLogin ? "Login" : "Sign up"}
+            margin={"normal"}
+            name="email"
+            onChange={handleChange}
+            value={userData.email}
+          />
           <FormControl variant="outlined" fullWidth>
             <InputLabel>Password</InputLabel>
             <OutlinedInput
@@ -59,6 +84,9 @@ export const AuthForm: React.FC<Props> = ({ isLogin }) => {
                 </InputAdornment>
               }
               label="Password"
+              name="password"
+              value={userData.password}
+              onChange={handleChange}
             />
           </FormControl>
         </Box>
