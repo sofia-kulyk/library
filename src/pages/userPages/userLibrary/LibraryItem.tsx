@@ -9,7 +9,13 @@ import {
 import React from "react";
 
 type Props = {
-  book: { title: string; photo: string };
+  book: {
+    title: string;
+    genre: string;
+    author: string;
+    comment: string;
+    photo: string | null;
+  };
 };
 
 const LibraryItem: React.FC<Props> = ({ book }) => {
@@ -21,7 +27,7 @@ const LibraryItem: React.FC<Props> = ({ book }) => {
             {book.title}
           </Typography>
           <img
-            src={book.photo}
+            src={book.photo || undefined}
             width={"150px"}
             style={{
               marginLeft: "10px",

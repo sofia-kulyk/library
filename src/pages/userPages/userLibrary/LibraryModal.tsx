@@ -26,8 +26,16 @@ type Props = {
   handleClose: () => void;
   open: boolean;
   books: Book[];
+  setError: (arg: null | string) => void;
+  error: string | null;
 };
-const LibraryModal: React.FC<Props> = ({ handleClose, open, books }) => {
+const LibraryModal: React.FC<Props> = ({
+  handleClose,
+  open,
+  books,
+  setError,
+  error,
+}) => {
   const [genre, setGenre] = useState<string>("");
   const [bookPhotoUrl, setBookPhotoUrl] = useState<null | string>(null);
   const [newBook, setNewBook] = useState<Book>({
@@ -92,13 +100,15 @@ const LibraryModal: React.FC<Props> = ({ handleClose, open, books }) => {
       Object.values(newBook).every((value) => value !== "" && value !== null)
     ) {
       books.push(newBook);
+      localStorage.setItem("library", JSON.stringify(books));
       handleClose();
+    } else {
+      setError("All fields must be filled in!!!");
     }
     setNewBook({ title: "", genre: "", author: "", comment: "", photo: null });
     setGenre("");
     setBookPhotoUrl(null);
   };
-  console.log(newBook);
   return (
     <>
       <Modal
@@ -147,12 +157,12 @@ const LibraryModal: React.FC<Props> = ({ handleClose, open, books }) => {
                 onChange={handleChangeGenre}
                 sx={{ marginBottom: "10px" }}
               >
-                <MenuItem value={10}>Comedy</MenuItem>
-                <MenuItem value={20}>Drama</MenuItem>
-                <MenuItem value={30}>Romantic</MenuItem>
-                <MenuItem value={40}>Detective</MenuItem>
-                <MenuItem value={50}>Horror</MenuItem>
-                <MenuItem value={60}>Historical</MenuItem>
+                <MenuItem value={"comedy"}>Comedy</MenuItem>
+                <MenuItem value={"drama"}>Drama</MenuItem>
+                <MenuItem value={"romantic"}>Romantic</MenuItem>
+                <MenuItem value={"detective"}>Detective</MenuItem>
+                <MenuItem value={"horror"}>Horror</MenuItem>
+                <MenuItem value={"historical"}>Historical</MenuItem>
               </Select>
             </FormControl>
 
@@ -205,11 +215,22 @@ const LibraryModal: React.FC<Props> = ({ handleClose, open, books }) => {
               </IconButton>
             </Box>
           </Box>
+
           <Box display={"flex"} justifyContent={"end"}>
             <Button variant="contained" size="large" onClick={handleAdd}>
               Add
             </Button>
           </Box>
+          {error && (
+            <Box
+              display={"flex"}
+              justifyContent={"center"}
+              fontFamily={"arial"}
+              color={"#fa786b"}
+            >
+              {error}
+            </Box>
+          )}
         </Box>
       </Modal>
     </>
