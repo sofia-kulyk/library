@@ -46,13 +46,12 @@ export const AuthForm: React.FC<Props> = ({ isLogin }) => {
       [event.target.name]: event?.target.value,
     }));
   }
-  console.log(userData);
   return (
     <Card
       sx={{
-        minWidth: "500px",
-        minHeight: "300px",
-        padding: "30px",
+        maxWidth: "500px",
+        margin: "0 auto",
+        marginTop: "200px",
       }}
     >
       <CardContent>
@@ -102,13 +101,18 @@ export const AuthForm: React.FC<Props> = ({ isLogin }) => {
             {isLogin ? "Sign in" : "Sign up"}
           </Button>
           {isLogin ? (
-            <Typography>
-              Don't have an account? <Link to={Paths.SignUpPage}>Sign up</Link>
+            <Typography textAlign={"center"}>
+              Don't have an account?{" "}
+              <Link to={Paths.SignUpPage} style={{ color: "blue" }}>
+                Sign up
+              </Link>
             </Typography>
           ) : (
-            <Typography>
+            <Typography textAlign={"center"}>
               Already have an account?{" "}
-              <Link to={Paths.SignInPage}>Sign in</Link>
+              <Link to={Paths.SignInPage} style={{ color: "blue" }}>
+                Sign in
+              </Link>
             </Typography>
           )}
         </Box>

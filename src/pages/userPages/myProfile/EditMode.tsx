@@ -38,7 +38,13 @@ const EditedMode: React.FC<Props> = ({
 }) => {
   console.log(userInfo);
   return (
-    <Card sx={{ minWidth: "450px", padding: "20px", marginLeft: "200px" }}>
+    <Card
+      sx={{
+        width: "500px",
+        padding: "20px",
+        margin: "0 auto",
+      }}
+    >
       <CardContent>
         <Box display="flex" justifyContent="space-between">
           <Box>
@@ -77,7 +83,7 @@ const EditedMode: React.FC<Props> = ({
             onChange={handleChange}
           />
         </Box>
-        <Box marginTop={"20px"}>
+        <Box marginTop={"20px"} marginLeft={"12px"}>
           <InputLabel>Date of birth</InputLabel>
           <CustomTextField
             variant="standard"
@@ -90,10 +96,10 @@ const EditedMode: React.FC<Props> = ({
           />
         </Box>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ display: "flex", justifyContent: "end" }}>
         <Button
           variant="contained"
-          sx={{ padding: "5px 20px", marginLeft: "350px" }}
+          sx={{ padding: "5px 20px", marginRight: "12px" }}
           onClick={() => setIsEditMode(false)}
         >
           Save

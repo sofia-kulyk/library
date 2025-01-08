@@ -32,7 +32,7 @@ export const NavBar = () => {
         </Button>
         <Typography
           marginRight={
-            location.pathname === Paths.HomePage ? "1100px" : "1239px"
+            location.pathname === Paths.HomePage ? "1100px" : "1244px"
           }
           fontFamily={"Gill Sans"}
           fontWeight={"bold"}

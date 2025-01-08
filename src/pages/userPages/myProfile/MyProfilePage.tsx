@@ -42,6 +42,7 @@ const MyProfilePage = () => {
         flexDirection="column"
         alignItems="center"
         marginLeft={"200px"}
+        marginTop={"100px"}
       >
         <IconButton component="label">
           <input
@@ -80,15 +81,17 @@ const MyProfilePage = () => {
           My Profile
         </Typography>
       </Box>
-      {isEditMode ? (
-        <EditedMode
-          userInfo={userinfo}
-          handleChange={handleChange}
-          setIsEditMode={setIsEditMode}
-        />
-      ) : (
-        <SavedMode setIsEditMode={setIsEditMode} userInfo={userinfo} />
-      )}
+      <Box marginLeft={"170px"}>
+        {isEditMode ? (
+          <EditedMode
+            userInfo={userinfo}
+            handleChange={handleChange}
+            setIsEditMode={setIsEditMode}
+          />
+        ) : (
+          <SavedMode setIsEditMode={setIsEditMode} userInfo={userinfo} />
+        )}
+      </Box>
     </>
   );
 };

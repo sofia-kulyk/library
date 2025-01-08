@@ -21,9 +21,9 @@ type Props = {
 
 const SavedMode: React.FC<Props> = ({ setIsEditMode, userInfo }) => {
   return (
-    <Card sx={{ minWidth: "450px", padding: "20px", marginLeft: "200px" }}>
+    <Card sx={{ width: "500px", padding: "20px", margin: "0 auto" }}>
       <CardContent>
-        <Box display="flex" justifyContent="space-around">
+        <Box display="flex" justifyContent="space-around" textAlign={"center"}>
           <Box>
             <Typography variant="h6">First name</Typography>
             <Typography color="grey">
@@ -38,22 +38,22 @@ const SavedMode: React.FC<Props> = ({ setIsEditMode, userInfo }) => {
             </Typography>
           </Box>
         </Box>
-        <Box marginTop={"15px"}>
+        <Box marginTop={"15px"} textAlign={"center"}>
           <Typography variant="h6">Email</Typography>
           <Typography color="grey"> {userInfo.email || "Email"}</Typography>
         </Box>
-        <Box marginTop={"20px"}>
+        <Box marginTop={"20px"} textAlign={"center"}>
           <Typography variant="h6">Date of birth</Typography>
           <Typography color="grey">
             {userInfo.birthday || "Date of birth"}
           </Typography>
         </Box>
       </CardContent>
-      <CardActions>
+      <CardActions sx={{ display: "flex", justifyContent: "end" }}>
         <Button
           onClick={() => setIsEditMode(true)}
           variant="contained"
-          sx={{ padding: "5px 20px", marginLeft: "350px" }}
+          sx={{ padding: "5px 20px", marginRight: "12px" }}
         >
           Edit
         </Button>
