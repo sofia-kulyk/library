@@ -23,6 +23,7 @@ const UserPageDrawer = () => {
 
   function handleClick(name: string) {
     if (name === "My profile") navigate(Paths.MyProfilePage);
+    if (name === "Library") navigate(Paths.LibraryPage);
   }
   return (
     <Drawer
